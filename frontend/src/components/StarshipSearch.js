@@ -32,13 +32,13 @@ function StarshipSearch() {
   const handleSuggestionClick = (name) => {
     setQuery(name);
     setSuggestions([]);
-    // Optionally, update search results immediately
-    // handleSearch();
+    handleSearch(name); // Perform the search immediately
   };
 
-  const handleSearch = () => {
+  const handleSearch = (searchQuery) => {
+    const queryToUse = searchQuery !== undefined ? searchQuery : query;
     const results = starships.filter((starship) =>
-      starship.name.toLowerCase().includes(query.toLowerCase())
+      starship.name.toLowerCase().includes(queryToUse.toLowerCase())
     );
     setSearchResults(results);
     setSuggestions([]);
