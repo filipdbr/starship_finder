@@ -103,6 +103,14 @@ function StarshipSearch() {
                 <h3>{starship.name}</h3>
                 <p><strong>Model:</strong> {starship.model}</p>
                 <p><strong>Manufacturer:</strong> {starship.manufacturer}</p>
+                <p><strong>Cost in Credits:</strong> {starship.costInCredits}</p>
+                <p><strong>Length:</strong> {starship.length}</p>
+                <p><strong>Crew:</strong> {starship.crew}</p>
+                <p><strong>Passengers:</strong> {starship.passengers}</p>
+                <p><strong>Max Atmosphering Speed:</strong> {starship.maxAtmospheringSpeed}</p>
+                <p><strong>Hyperdrive Rating:</strong> {starship.hyperdriveRating}</p>
+                <p><strong>Cargo Capacity:</strong> {starship.cargoCapacity}</p>
+                <p><strong>Consumables:</strong> {starship.consumables}</p>
               </li>
             ))}
           </ul>
