@@ -11,8 +11,8 @@ public class QueryService {
     @Autowired
     private QueryRepository queryRepository;
 
-    public void saveQuery(String queryText) {
-        Query query = new Query(queryText);
+    public void saveQuery(String queryText, String ip) {
+        Query query = new Query(queryText, ip);
         queryRepository.save(query);
     }
 }

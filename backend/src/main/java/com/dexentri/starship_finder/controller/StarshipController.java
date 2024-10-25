@@ -3,6 +3,7 @@ package com.dexentri.starship_finder.controller;
 import com.dexentri.starship_finder.model.Starship;
 import com.dexentri.starship_finder.service.QueryService;
 import com.dexentri.starship_finder.service.StarshipService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +33,9 @@ public class StarshipController {
     }
 
     @PostMapping("/queries")
-    public ResponseEntity<Void> saveQuery(@RequestBody String queryText) {
-        queryService.saveQuery(queryText);
+    public ResponseEntity<Void> saveQuery(@RequestBody String queryText, HttpServletRequest request) {
+        String ipAddress = request.getRemoteAddr();
+        queryService.saveQuery(queryText, ipAddress);
         return ResponseEntity.ok().build();
     }
 }
