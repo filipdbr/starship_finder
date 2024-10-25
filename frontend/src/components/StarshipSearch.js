@@ -18,7 +18,7 @@ function StarshipSearch() {
 
   // Function to save the query in MongoDB
   const saveQuery = (queryText) => {
-    axios.post('/api/queries', queryText)
+    axios.post('/api/queries', { queryText })  // Send queryText as part of an object
       .then(response => {
         console.log('Query saved:', queryText);
       })
@@ -94,28 +94,37 @@ function StarshipSearch() {
           </ul>
         )}
       </div>
+
       {searchResults.length > 0 && (
         <div className="results">
-          <h2>Search Results</h2>
-          <ul>
+            <h2 className="results-header">
+                {searchResults.length} {searchResults.length === 1 ? 'Result' : 'Results'}
+            </h2>
+            <ul>
             {searchResults.map((starship, index) => (
-              <li key={index}>
-                <h3>{starship.name}</h3>
-                <p><strong>Model:</strong> {starship.model}</p>
-                <p><strong>Manufacturer:</strong> {starship.manufacturer}</p>
-                <p><strong>Cost in Credits:</strong> {starship.costInCredits}</p>
-                <p><strong>Length:</strong> {starship.length}</p>
-                <p><strong>Crew:</strong> {starship.crew}</p>
-                <p><strong>Passengers:</strong> {starship.passengers}</p>
-                <p><strong>Max Atmosphering Speed:</strong> {starship.maxAtmospheringSpeed}</p>
-                <p><strong>Hyperdrive Rating:</strong> {starship.hyperdriveRating}</p>
-                <p><strong>Cargo Capacity:</strong> {starship.cargoCapacity}</p>
-                <p><strong>Consumables:</strong> {starship.consumables}</p>
-              </li>
+                <li key={index}>
+                <div className="starship-info">
+                    <span className="starship-name">{starship.name}</span>
+                    <span><strong>Model:</strong> {starship.model}</span>
+                    <span><strong>Manufacturer:</strong> {starship.manufacturer}</span>
+                </div>
+                <div className="starship-details">
+                    <span><strong>Cost in Credits:</strong> {starship.costInCredits || 'unknown'}</span>
+                    <span><strong>Length:</strong> {starship.length || 'unknown'}</span>
+                    <span><strong>Crew:</strong> {starship.crew || 'unknown'}</span>
+                    <span><strong>Passengers:</strong> {starship.passengers || 'unknown'}</span>
+                    <span><strong>Max Atmosphering Speed:</strong> {starship.maxAtmospheringSpeed || 'unknown'}</span>
+                    <span><strong>Hyperdrive Rating:</strong> {starship.hyperdriveRating || 'unknown'}</span>
+                    <span><strong>Cargo Capacity:</strong> {starship.cargoCapacity || 'unknown'}</span>
+                    <span><strong>Consumables:</strong> {starship.consumables || 'unknown'}</span>
+                </div>
+                </li>
             ))}
-          </ul>
+            </ul>
         </div>
-      )}
+        )}
+
+
     </div>
   );
 }
