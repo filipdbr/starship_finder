@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './StarshipSearch.css';
+import axios from 'axios'; // For sending HTTP requests
 
 function StarshipSearch() {
   const [query, setQuery] = useState('');
@@ -14,6 +15,17 @@ function StarshipSearch() {
       .then((data) => setStarships(data))
       .catch((error) => console.error('Error fetching starships:', error));
   }, []);
+
+  // Function to save the query in MongoDB
+  const saveQuery = (queryText) => {
+    axios.post('/api/queries', queryText)
+      .then(response => {
+        console.log('Query saved:', queryText);
+      })
+      .catch(error => {
+        console.error('Error saving query:', error);
+      });
+  };
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -32,7 +44,10 @@ function StarshipSearch() {
   const handleSuggestionClick = (name) => {
     setQuery(name);
     setSuggestions([]);
-    handleSearch(name); // Perform the search immediately
+    handleSearch(name); // Perform the search immediately on click
+
+    // Save the query when the user clicks a suggestion
+    saveQuery(name);
   };
 
   const handleSearch = (searchQuery) => {
@@ -42,6 +57,11 @@ function StarshipSearch() {
     );
     setSearchResults(results);
     setSuggestions([]);
+
+    // Save the query when the user presses enter
+    if (!searchQuery) {
+      saveQuery(queryToUse);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -83,7 +103,6 @@ function StarshipSearch() {
                 <h3>{starship.name}</h3>
                 <p><strong>Model:</strong> {starship.model}</p>
                 <p><strong>Manufacturer:</strong> {starship.manufacturer}</p>
-                {/* Add more details as needed */}
               </li>
             ))}
           </ul>
