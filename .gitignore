@@ -1,10 +1,23 @@
-backend/HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# General Exclusions for the Root Folder
+### Logs ###
+*.log
+logs/
 
-### STS ###
+### Environment Files ###
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### IDE-specific ###
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Eclipse/STS/NetBeans ###
 .apt_generated
 .classpath
 .factorypath
@@ -12,22 +25,43 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+### MacOS ###
+.DS_Store
+
+### Windows ###
+Thumbs.db
+
+# Backend-Specific Exclusions (inside backend/ folder)
+backend/target/
+backend/.mvn/
+backend/mvnw*
+backend/build/
+backend/.gradle/
+backend/*.war
+backend/*.jar
+backend/HELP.md
+
+### Backend - Maven Wrapper ###
+backend/!.mvn/wrapper/maven-wrapper.jar
+
+# Frontend-Specific Exclusions (inside frontend/ folder)
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.cache/
+
+### Frontend Environment Files ###
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
