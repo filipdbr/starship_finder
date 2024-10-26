@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# Starship Finder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Starship Finder** is a web application that allows users to search for starships from the Star Wars universe. It leverages the [SWAPI (Star Wars API)](https://swapi.dev/) to fetch starship data and uses MongoDB for storing search queries.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Search for starships by name
+- Display starship details like model, manufacturer, and crew capacity
+- Store and track user search queries in MongoDB
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Backend:** Java, Spring Boot
+- **Frontend:** React
+- **Database:** MongoDB
+- **API:** SWAPI (Star Wars API)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+Before you begin, ensure you have the following installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Java 21 or higher (for backend)
+- Node.js and npm (for frontend)
+- MongoDB (local or remote instance)
 
-### `npm run build`
+## Environment Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application uses environment variables to manage sensitive data like database connection strings. You can configure these variables in a `.env` file in the root directory of your backend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend (.env)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Create a `.env` file in the `backend` directory.
+2. To help set up your own `.env` file, there is a template provided named `.env.template`. 
 
-### `npm run eject`
+### Steps to use `.env.template`:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Copy the `.env.template` file and rename it to `.env`.
+```bash
+cp .env.template .env
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Open the newly created .env file and replace the placeholder values with your actual configuration.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Backend (.env)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Create a `.env` file in the `backend` directory.
+2. Add the following environment variable:
 
-## Learn More
+   ```bash
+   MONGODB_URI=mongodb://localhost:27017/starship_queries
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Frontend (proxy)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The frontend needs to communicate with the backend running on a different port. Ensure that the `package.json` in your React project contains the following:
 
-### Code Splitting
+```json
+"proxy": "http://localhost:8080"
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This ensures API calls from React (on port 3000) are correctly proxied to the Spring Boot backend (on port 8080).
 
-### Analyzing the Bundle Size
+## How to Launch the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 1. Clone the Repository
 
-### Making a Progressive Web App
+```bash
+git clone https://github.com/yourusername/starship_finder.git
+cd starship_finder
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 2. Launch the Backend
 
-### Advanced Configuration
+Navigate to the backend directory:
+```bash
+cd ./backend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Build and run the backend:
+```bash
+mvn clean install
+mvn spring-boot:run
+```
 
-### Deployment
+The backend should now be running on `http://localhost:8080`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 3. Launch the Frontend
 
-### `npm run build` fails to minify
+Navigate to the frontend directory:
+```
+cd ./frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Install dependencies and start the React app:
+```bash
+npm install
+npm start
+```
+The frontend will be available at `http://localhost:3000`
+
+## Usage
+- Open your browser and navigate to `http://localhost:3000`.
+- Enter a starship name in the search bar and see the results.
+- Search queries will be saved in the MongoDB database.
+
+## Project Structure
+- `backend/` - Spring Boot application that handles API requests and connects to MongoDB.
+- `frontend/` - React application for the UI.
+- `.env` - Environment variables for the backend.
