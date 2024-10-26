@@ -16,6 +16,7 @@ import java.util.List;
  * This controller fetches starship data from the SWAPI and returns it
  * in the form of a JSON response.
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class StarshipController {
